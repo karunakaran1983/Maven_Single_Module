@@ -1,24 +1,16 @@
 pipeline {
     agent any
     stages {
-        stage ('Start'){
-            steps{
-                echo "This is the first Stage of the Pipeline"
+        stage('Build Appln') {
+            steps {
+                echo "compile and package using maven"
+                sh 'mvn clean package'
             }
-        }
-        stage ('Middle') {
-            steps{
-                echo "This is the Middle Stage of the Pipeline"
-            }
-        }
-        stage ('End') {
-            steps{
-                echo "This is the End Stage of the Pipeline"
-            }
-        }
-        stage ('Final') {
-            steps{
-                echo "This is the Final Stage of the Pipeline"
+            post {
+                success {
+                    echo "Archive the artifacts..."
+                    archiveArtifacts artifacts: '**/*.jar'
+                }
             }
         }
     }
