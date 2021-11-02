@@ -7,7 +7,7 @@ job('Maven_DSL_JOB') {
         scm('* * * * *')
     }
     steps {
-        maven('clean build compile package','Maven_Single_Module/pom.xml')
+        maven('clean build compile package','pom.xml')
     }
     publishers {
         archiveArtifacts '**/*.jar'
